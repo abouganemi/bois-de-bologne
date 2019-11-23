@@ -19,7 +19,7 @@ try:
             (540, "Fith"),
             (550, "Sixth"),
             (560, "Seventh")]
-    
+
     cur = con.cursor()
     # On cree une requete parametree d'execution multiple avec execute many
     # on passe aussi la iste d'insertions - rows en parametre
