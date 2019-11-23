@@ -1,0 +1,61 @@
+LMD: INSERT, UPDATE, DELETE, SELECT
+
+# EXAMPLES 
+INSERT INTO my_table VALUES (va1, val2, val3)
+INSERT INTO regions VALUES (1, asie)
+---------
+INSERT INTO my_table(col1, col2) VALUES (val1, val2....)
+INSERT INTO countries(country.name, country.id) VALUES('Canada', 'CAN')
+---------
+UPDATE my_table SET col1=val1 WHERE code1
+UPDATE regions SET region.name = 'CAN' WHERE regions.id = 1
+############################## =, <>, >, <, >=, <=
+---------
+SELECT col1, col2... FROM my_table
+SELECT region.name FROM my_table
+SELECT country.id, country.name FROM countries
+SELECT distinct city FROM locations # Unic results
+SELECT * FROM regions WHERE region.id > 5
+SELECT country.id, country.name FROM countries WHERE region.id = 3
+SELECT first_name, last_name FROM employee WHERE department.id = 1 and salary > 5000
+SELECT * FROM regions WHERE region.name like 'A%'
+SELECT region.id FROM regions MINUS/UNION/INTERSECT SELECT region.id FROM countries
+SELECT department.id FROM departments MINUS SELECT department.id FROM employee
+
+# Queries
+select * from DEPARTMENTS
+
+select * from EMPLOYEES
+
+select department_id from DEPARTMENTS minus select department_id from EMPLOYEES
+
+SELECT department_id, department_name FROM DEPARTMENTS WHERE department_id NOT IN (SELECT department_id FROM EMPLOYEES)
+
+SELECT region_id, region_name FROM REGIONS WHERE region_id NOT IN (SELECT region_id FROM COUNTRIES)
+
+SELECT first_name as "Name", last_name as "Last Name", job_id as "Job ID" FROM EMPLOYEES where department_id = 100 AND SALARY > 8000
+
+SELECT first_name, last_name, job_title FROM EMPLOYEES NATURAL JOIN JOBS where department_id = 100 AND SALARY > 8000
+
+SELECT first_name, last_name, job_title FROM EMPLOYEES JOIN JOBS ON EMPLOYEES.job_id=JOBS.job_id where department_id = 100 AND SALARY > 8000
+
+SELECT e.first_name, e.last_name, j.job_title, j.job_id, d.department_name
+FROM EMPLOYEES e
+JOIN jobs j ON e.job_id=j.job_id
+JOIN DEPARTMENTS d on d.DEPARTMENT_ID = e.DEPARTMENT_ID
+WHERE e.department_id = 100 AND e.salary > 8000
+
+SELECT e.first_name, e.last_name, j.job_title, j.job_id, d.department_name
+FROM EMPLOYEES e
+JOIN JOBS j ON e.job_id=j.job_id
+JOIN DEPARTMENTS d on d.DEPARTMENT_ID = e.DEPARTMENT_ID
+WHERE e.department_id = 100 AND e.salary > 8000
+ORDER BY d.department_name asc, e.first_name desc
+
+SELECT e.first_name, e.last_name, d.department_name
+FROM EMPLOYEES e
+RIGHT JOIN DEPARTMENTS d on d.department_id = e.department_id 
+ORDER BY department_name asc, e.first_name desc"
+
+INSERT INTO REGIONS VALUES (55, SOUTH_AMERICA)
+UPDATE REGIONS SET region_name = 'zahier' region_id = 55
