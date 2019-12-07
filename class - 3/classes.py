@@ -88,7 +88,7 @@ def insert_user(username, password, last_name, name, email, creationdate,
 def user_input_category():
     while True:
         input_id = input("Please insert the ID as number: ")
-        id = validate_integer(input_id)
+        id = validate("^[0-9]+$", input_id)
 
         if id:
             break
@@ -98,7 +98,7 @@ def user_input_category():
 
     while True:
         input_name = input("Please insert the category name: ")
-        name = validate_string(input_name)
+        name = validate("^[A-Za-z]{1,30}+$", input_name)
 
         if name:
             break
@@ -112,65 +112,47 @@ def user_input_category():
 def user_input_user():
     while True:
         input_username = input("Please insert the username: ")
-        username = validate_alpha_numeric(input_username)
+        username = validate("^[A-Za-z0-9]+$", input_username)
 
-        if username:
-            break
+        if input_username.__len__() <= 30:
+            if username:
+                break
+            else:
+                print("Please enter a valid username.")
+                continue
         else:
-            print("Please enter a valid username.")
+            print("The username cannot be longer that 30 characters")
             continue
 
     while True:
         input_password = input("Please insert a password: ")
-        name = validate_string(".+[A-Za-z0-9].+", input_password)
+        name = validate(".+[A-Za-z0-9].+", input_password)
 
-        if name and input_password.__len__() <= 15:
-            break
+        if input_password.__len__() <= 15:
+            if name:
+                break
+            else:
+                print("Please enter a valid name. Cannot contains numbers")
+                continue
         else:
-            print("Please enter a valid name. Cannot contains numbers")
+            print("The password cannot be longer that 15 characters")
             continue
 
+    print(input_username)
+    print(input_password)
 
-def validate_integer(regex, characters):
+
+def validate(regex, characters):
     '''
     Function to validate integer
     :param characters: Chain of characters to be evaluated aginst regex
     :return: Bool
     '''
-    # "^[0-9]+$"
+    # "^[0-9]+$" # Number
+    # "^[A-Za-z]+$" String
+    # # "^[A-Za-z0-9]+$" Alphanumeric
     result = re.match(regex, characters)
     if result:
         return True
     else:
         return False
-
-
-def validate_string(regex, characters):
-    '''
-    Function to validate integer
-    :param characters: Chain of characters to be evaluated against regex
-    :return: Bool
-    '''
-    # "^[A-Za-z]+$"
-    result = re.match(regex, characters)
-    if result:
-        return True
-    else:
-        return False
-
-
-def validate_alpha_numeric(regex, characters):
-    '''
-    Function to validate integer
-    :param characters: Chain of characters to be evaluated against regex
-    :return: Bool
-    '''
-    # "^[A-Za-z0-9]+$"
-    result = re.match(regex, characters)
-    if result:
-        return True
-    else:
-        return False
-
-
-
